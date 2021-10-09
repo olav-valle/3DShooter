@@ -24,8 +24,8 @@ public class PlayerController : MonoBehaviour
 
 
     // Additional components of the player component.
-    private CharacterController controller;
-    private InputManager inputManager;
+    CharacterController controller;
+    InputManager inputManager;
 
 
 
@@ -47,7 +47,7 @@ public class PlayerController : MonoBehaviour
     /// <summary>
     /// Set up CharacterController object for this object.
     /// </summary>
-    private void SetUpCharacterController()
+    void SetUpCharacterController()
     {
         controller = GetComponent<CharacterController>();
         if (controller == null)
@@ -56,9 +56,9 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void SetUpInputManager()
+    void SetUpInputManager()
     {
-        inputManager = GetComponent<InputManager>();
+        inputManager = InputManager.instance;
         if (inputManager == null)
         {
             Debug.LogError("The player controller script does not have an InputManager on the same object.");
@@ -76,6 +76,46 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     void Update()
     {
+        ProcessMovement();
+    }
+
+    // movement global
+    Vector3 moveDirection;
+    
+    void ProcessMovement()
+    {
+
+        float leftRightInput = inputManager.horizontalMoveAxis;
+        float forwardBackwardInput = inputManager.verticalMoveAxis;
+        bool jumpPressed = inputManager.jumpPressed;
+        
+        
+        // Handle the control of the player while it's on the ground.
+        if (controller.isGrounded)
+        {
+            // stores xyz movement data from inputManager. set y=0, since we are on the ground.
+            moveDirection = new Vector3(leftRightInput, 0, forwardBackwardInput);
+            // set the move direction in relation to the transform.
+            moveDirection = transform.TransformDirection(moveDirection);
+
+            moveDirection = moveDirection * moveSpeed;
+
+            // Should we jump?
+            if (jumpPressed)
+            {
+                moveDirection.y = jumpPower;
+            }
+
+        }
+
+        // applies gravity to player jump movement.
+        moveDirection.y -= gravity * Time.deltaTime;
+
+        controller.Move(moveDirection * Time.deltaTime);
+
+
+        // Debug.Log("The horizontal input is: " + leftRightInput);
+
 
     }
 }
