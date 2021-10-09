@@ -19,8 +19,18 @@ public class PlayerController : MonoBehaviour
     [Tooltip("The force of gravity acting on the player")]
     public float gravity = 9.81f;
 
-    [Header("Required references")] [Tooltip("The player shooter script that fires projectiles")]
+    [Header("Jump Timing")] 
+    [Tooltip("Leniency in jump timing after leaving ground.")]
+    public float jumpTimeLeniency = 0.1f;
+    float timeToStopBeingLenient = 0f;
+    
+    
+    [Tooltip("Toggle double jump availability.")]
+    public bool doubleJumpAvailable = false;
+    [Header("Required references")] 
+    [Tooltip("The player shooter script that fires projectiles")]
     public Shooter playerShooter;
+    
 
 
     // Additional components of the player component.
@@ -77,6 +87,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         ProcessMovement();
+        ProcessRotation();
     }
 
     // movement global
@@ -93,6 +104,10 @@ public class PlayerController : MonoBehaviour
         // Handle the control of the player while it's on the ground.
         if (controller.isGrounded)
         {
+            // enable double jump when we touch ground.
+            doubleJumpAvailable = true;
+            // Jump timing leniency timer
+            timeToStopBeingLenient = Time.time + jumpTimeLeniency;
             // stores xyz movement data from inputManager. set y=0, since we are on the ground.
             moveDirection = new Vector3(leftRightInput, 0, forwardBackwardInput);
             // set the move direction in relation to the transform.
@@ -107,14 +122,55 @@ public class PlayerController : MonoBehaviour
             }
 
         }
+        else
+        {
+            moveDirection = new Vector3(
+                leftRightInput * moveSpeed, 
+                moveDirection.y,
+                forwardBackwardInput*moveSpeed);
+
+            moveDirection = transform.TransformDirection(moveDirection);
+
+            if (jumpPressed && Time.time < timeToStopBeingLenient)
+            {
+                moveDirection.y = jumpPower;
+
+            }
+            else if (jumpPressed && doubleJumpAvailable)
+            {
+                moveDirection.y = jumpPower;
+                doubleJumpAvailable = false;
+            }
+
+        }
 
         // applies gravity to player jump movement.
         moveDirection.y -= gravity * Time.deltaTime;
 
+        if (controller.isGrounded && moveDirection.y < 0)
+        {
+            // give player some help going up an incline
+            moveDirection.y = -0.3f;
+        }
+
+            // perform movement
         controller.Move(moveDirection * Time.deltaTime);
 
 
         // Debug.Log("The horizontal input is: " + leftRightInput);
+
+
+    }
+
+    void ProcessRotation()
+    {
+        float horizontalLookInput = inputManager.horizontalLookAxis;
+
+        Vector3 playerRotation = transform.rotation.eulerAngles;
+        transform.rotation = Quaternion.Euler(new Vector3(
+            playerRotation.x, 
+            playerRotation.y + (horizontalLookInput * lookSpeed * Time.deltaTime),
+            playerRotation.z));
 
 
     }
