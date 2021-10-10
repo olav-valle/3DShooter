@@ -30,6 +30,10 @@ public class PlayerController : MonoBehaviour
     [Header("Required references")] 
     [Tooltip("The player shooter script that fires projectiles")]
     public Shooter playerShooter;
+    [Tooltip("The player health script")]
+    public Health playerHealth;
+
+    public List<GameObject> disableWhileDead;
     
 
 
@@ -86,8 +90,28 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     void Update()
     {
+
+        // tasks to perform if player is dead
+        if (playerHealth.currentHealth <= 0)
+        {
+            foreach (GameObject go in disableWhileDead)
+            {
+                go.SetActive(false);
+            }
+
+            return;
+        }
+        else
+        {
+            foreach (GameObject go in disableWhileDead)
+            {
+                go.SetActive(true); 
+            }
+        }
         ProcessMovement();
         ProcessRotation();
+        
+        
     }
 
     // movement global
