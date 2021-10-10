@@ -112,7 +112,7 @@ GameObject:
   - component: {fileID: 3291799336425497615}
   - component: {fileID: 5454889103127659523}
   m_Layer: 2
-  m_Name: IcicleProjectile
+  m_Name: ShotGunIcicleProjectile
   m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -175,7 +175,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   teamId: 0
-  damageAmount: 1
+  damageAmount: 3
   destroyAfterDamage: 1
   dealDamageOnTriggerEnter: 1
   dealDamageOnTriggerStay: 1
@@ -226,3 +226,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destroyEffect: {fileID: 5119265245389739690, guid: 66eb64c30662afa42a8b61adbee9720f, type: 3}
+  onDestroyEvent:
+    m_PersistentCalls:
+      m_Calls: []
