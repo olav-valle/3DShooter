@@ -56,6 +56,7 @@ public class PlayerController : MonoBehaviour
     {
         SetUpCharacterController();
         SetUpInputManager();
+        KeyRing.AddKey(0);
     }
 
     /// <summary>
