@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 3949236009851906116}
   - component: {fileID: 3949236009851906117}
   m_Layer: 0
-  m_Name: Beehive Gun
+  m_Name: Electro Gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -94,8 +94,8 @@ MonoBehaviour:
   idleAnimationName: Idle
   useAmmo: 0
   ammunitionID: 1
-  mustReload: 0
-  magazineSize: 1
+  mustReload: 1
+  magazineSize: 10
   roundsLoaded: 0
   reloadTime: 1
   weaponImage: {fileID: 21300000, guid: bf89ce7c1a997d84fba0016a1448d8c9, type: 3}
@@ -107,6 +107,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3949236009851906116}
     m_Modifications:
+    - target: {fileID: -4216859302048453862, guid: 2f0209f961f8c5d449e0ab5016e105db, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 2f0209f961f8c5d449e0ab5016e105db, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -120,6 +124,10 @@ PrefabInstance:
       value: -0.010090779
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 2f0209f961f8c5d449e0ab5016e105db, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -4216859302048453862, guid: 2f0209f961f8c5d449e0ab5016e105db, type: 3}
       propertyPath: m_LocalRotation.x
       value: -0
       objectReference: {fileID: 0}
@@ -130,14 +138,6 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 2f0209f961f8c5d449e0ab5016e105db, type: 3}
       propertyPath: m_LocalRotation.z
       value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: -4216859302048453862, guid: 2f0209f961f8c5d449e0ab5016e105db, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -4216859302048453862, guid: 2f0209f961f8c5d449e0ab5016e105db, type: 3}
-      propertyPath: m_RootOrder
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 2f0209f961f8c5d449e0ab5016e105db, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -170,6 +170,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 3949236009640371300}
     m_Modifications:
     - target: {fileID: 1035497449305800745, guid: e452243bb75fd674eb13b01e9ecab913, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1035497449305800745, guid: e452243bb75fd674eb13b01e9ecab913, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -182,6 +186,10 @@ PrefabInstance:
       value: -0.1
       objectReference: {fileID: 0}
     - target: {fileID: 1035497449305800745, guid: e452243bb75fd674eb13b01e9ecab913, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1035497449305800745, guid: e452243bb75fd674eb13b01e9ecab913, type: 3}
       propertyPath: m_LocalRotation.x
       value: -0
       objectReference: {fileID: 0}
@@ -192,14 +200,6 @@ PrefabInstance:
     - target: {fileID: 1035497449305800745, guid: e452243bb75fd674eb13b01e9ecab913, type: 3}
       propertyPath: m_LocalRotation.z
       value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1035497449305800745, guid: e452243bb75fd674eb13b01e9ecab913, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1035497449305800745, guid: e452243bb75fd674eb13b01e9ecab913, type: 3}
-      propertyPath: m_RootOrder
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1035497449305800745, guid: e452243bb75fd674eb13b01e9ecab913, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
